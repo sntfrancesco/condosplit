@@ -16,13 +16,15 @@ cd condosplit
 npm install
 ```
 
-### 2. Registra il server in Claude Code
+### 2. Registra il server in Claude Code (globale)
+
+Il server va installato **una volta sola a livello globale**: legge `condo.config.json` dalla directory corrente, quindi funziona in qualsiasi progetto senza ulteriori configurazioni.
 
 ```bash
-claude mcp add condosplit node /percorso/assoluto/condosplit/src/server.js
+claude mcp add --global condosplit node /percorso/assoluto/condosplit/src/server.js
 ```
 
-Oppure modifica manualmente `.claude/settings.json` (o `settings.local.json`):
+Oppure modifica manualmente `~/.claude/settings.json`:
 
 ```json
 {
