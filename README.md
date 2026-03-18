@@ -11,7 +11,7 @@ condosplit è un **MCP server** che estende Claude Code con strumenti dedicati a
 ### 1. Clona e installa le dipendenze
 
 ```bash
-git clone <repo-url> condosplit
+git clone https://github.com/sntfrancesco/condosplit.git condosplit
 cd condosplit
 npm install
 ```
