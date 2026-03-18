@@ -21,7 +21,7 @@ npm install
 Il server va installato **una volta sola a livello globale**: legge `condo.config.json` dalla directory corrente, quindi funziona in qualsiasi progetto senza ulteriori configurazioni.
 
 ```bash
-claude mcp add --global condosplit node /percorso/assoluto/condosplit/src/server.js
+claude mcp add -s user condosplit node /percorso/assoluto/condosplit/src/server.js
 ```
 
 Oppure modifica manualmente `~/.claude/settings.json`:
