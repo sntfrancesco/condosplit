@@ -1,0 +1,77 @@
+{
+  "building": {
+    "name": "Condominio Via Roma 1",
+    "floors": [
+      {
+        "level": 4,
+        "label": "Quarto Piano",
+        "staircaseAccess": true,
+        "units": [
+          { "id": "I4.a", "label": "Rossi Mario" },
+          { "id": "I4.b", "label": "Verdi Luca" }
+        ]
+      },
+      {
+        "level": 3,
+        "label": "Terzo Piano",
+        "staircaseAccess": true,
+        "units": [
+          { "id": "I3.a", "label": "Bianchi Anna" },
+          { "id": "I3.b", "label": "Ferrari Sara" }
+        ]
+      },
+      {
+        "level": 2,
+        "label": "Secondo Piano",
+        "staircaseAccess": true,
+        "units": [
+          { "id": "I2.a", "label": "Colombo Giorgio" },
+          { "id": "I2.b", "label": "Ricci Paola" }
+        ]
+      },
+      {
+        "level": 1,
+        "label": "Primo Piano",
+        "staircaseAccess": true,
+        "units": [
+          { "id": "I1.a", "label": "Conti Elena" },
+          { "id": "I1.b", "label": "Mancini Roberto" }
+        ]
+      },
+      {
+        "level": 0,
+        "label": "Piano Terra",
+        "staircaseAccess": false,
+        "units": [
+          { "id": "I0.a", "label": "Negozio A" },
+          { "id": "I0.b", "label": "Negozio B" }
+        ]
+      }
+    ]
+  },
+  "expenseTypes": [
+    {
+      "id": "pulizia_scala",
+      "name": "Pulizia Scala",
+      "description": "Spese periodiche di pulizia della scala condominiale",
+      "splitRule": "staircase_equal"
+    },
+    {
+      "id": "ascensore",
+      "name": "Quota Assistenza Ascensore",
+      "description": "Quota periodica per manutenzione e assistenza ascensore",
+      "splitRule": "staircase_equal"
+    },
+    {
+      "id": "bolletta_luce",
+      "name": "Bolletta Luce Scala",
+      "description": "Bolletta energia elettrica scala (alimenta: autoclave, ascensore, luce scala)",
+      "splitRule": "utility_breakdown",
+      "utilityComponents": [
+        { "name": "Autoclave",  "percentage": 33, "splitGroup": "all" },
+        { "name": "Ascensore",  "percentage": 34, "splitGroup": "staircase" },
+        { "name": "Luce Scala", "percentage": 33, "splitGroup": "staircase" }
+      ]
+    }
+  ]
+}
