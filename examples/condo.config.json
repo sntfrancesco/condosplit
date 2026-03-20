@@ -54,19 +54,22 @@
       "id": "pulizia_scala",
       "name": "Pulizia Scala",
       "description": "Spese periodiche di pulizia della scala condominiale",
-      "splitRule": "staircase_equal"
+      "splitRule": "staircase_equal",
+      "defaultPaymentCoordinatesId": "impresa_pulizie"
     },
     {
       "id": "ascensore",
       "name": "Quota Assistenza Ascensore",
       "description": "Quota periodica per manutenzione e assistenza ascensore",
-      "splitRule": "staircase_equal"
+      "splitRule": "staircase_equal",
+      "defaultPaymentCoordinatesId": "ditta_ascensori"
     },
     {
       "id": "bolletta_luce",
       "name": "Bolletta Luce Scala",
       "description": "Bolletta energia elettrica scala (alimenta: autoclave, ascensore, luce scala)",
       "splitRule": "utility_breakdown",
+      "defaultPaymentCoordinatesId": "enel_energia",
       "utilityComponents": [
         { "name": "Autoclave",  "percentage": 33, "splitGroup": "all" },
         { "name": "Ascensore",  "percentage": 34, "splitGroup": "staircase" },

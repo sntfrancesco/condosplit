@@ -1,0 +1,29 @@
+{
+  "coordinates": [
+    {
+      "id": "enel_energia",
+      "label": "Enel Energia",
+      "intestatario": "Condominio Via Roma 1",
+      "iban": "IT60X0542811101000000123456",
+      "banca": "Intesa Sanpaolo",
+      "note": "Inserire numero cliente in causale"
+    },
+    {
+      "id": "impresa_pulizie",
+      "label": "Impresa Pulizie Bianchi",
+      "intestatario": "Bianchi Servizi Srl",
+      "iban": "IT12A0306901783100000001234",
+      "banca": "Banco BPM"
+    },
+    {
+      "id": "ditta_ascensori",
+      "label": "Ascensori Rossi Srl",
+      "intestatario": "Ascensori Rossi Srl",
+      "iban": "IT34G0200801650000401885162",
+      "swift": "UNCRITM1",
+      "banca": "UniCredit",
+      "causale": "Quota assistenza ascensore",
+      "note": "Citare numero contratto in causale"
+    }
+  ]
+}

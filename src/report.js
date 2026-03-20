@@ -3,7 +3,7 @@ import { ruleLabel } from './expenses.js';
 const LINE = '─'.repeat(62);
 const DLINE = '═'.repeat(62);
 
-export function buildReport(config, expenseType, label, totalAmount, splits) {
+export function buildReport(config, expenseType, label, totalAmount, splits, coordinate = null) {
   const lines = [];
 
   lines.push('');
@@ -57,6 +57,22 @@ export function buildReport(config, expenseType, label, totalAmount, splits) {
   lines.push(LINE);
   lines.push(`  TOTALE VERIFICATO: ${fmt(calcTotal)}`);
   lines.push(DLINE);
+
+  if (coordinate) {
+    lines.push('');
+    lines.push(DLINE);
+    lines.push('  COORDINATE DI PAGAMENTO');
+    lines.push(LINE);
+    lines.push(`  Nome         : ${coordinate.label}`);
+    if (coordinate.intestatario) lines.push(`  Intestatario : ${coordinate.intestatario}`);
+    if (coordinate.iban)         lines.push(`  IBAN         : ${coordinate.iban}`);
+    if (coordinate.swift)        lines.push(`  SWIFT/BIC    : ${coordinate.swift}`);
+    if (coordinate.banca)        lines.push(`  Banca        : ${coordinate.banca}`);
+    lines.push(`  Causale      : ${coordinate.causale || label}`);
+    if (coordinate.note)         lines.push(`  Note         : ${coordinate.note}`);
+    lines.push(DLINE);
+  }
+
   lines.push('');
 
   return lines.join('\n');

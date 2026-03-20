@@ -62,19 +62,22 @@ const DEFAULT_CONFIG = {
       id: "pulizia_scala",
       name: "Pulizia Scala",
       description: "Spese periodiche di pulizia della scala condominiale",
-      splitRule: "staircase_equal"
+      splitRule: "staircase_equal",
+      defaultPaymentCoordinatesId: null
     },
     {
       id: "ascensore",
       name: "Quota Assistenza Ascensore",
       description: "Quota periodica per manutenzione e assistenza ascensore",
-      splitRule: "staircase_equal"
+      splitRule: "staircase_equal",
+      defaultPaymentCoordinatesId: null
     },
     {
       id: "bolletta_luce",
       name: "Bolletta Luce Scala",
       description: "Bolletta energia elettrica scala (alimenta: autoclave, ascensore, luce scala)",
       splitRule: "utility_breakdown",
+      defaultPaymentCoordinatesId: null,
       utilityComponents: [
         { name: "Autoclave",  percentage: 33, splitGroup: "all" },
         { name: "Ascensore",  percentage: 34, splitGroup: "staircase" },
@@ -93,6 +96,12 @@ export function initProject(projectDir) {
   } else {
     fs.writeFileSync(configPath, JSON.stringify(DEFAULT_CONFIG, null, 2), 'utf8');
     results.push(`Creato: ${configPath}`);
+  }
+
+  const coordsPath = path.resolve(projectDir, 'condo.coordinates.json');
+  if (!fs.existsSync(coordsPath)) {
+    fs.writeFileSync(coordsPath, JSON.stringify({ coordinates: [] }, null, 2), 'utf8');
+    results.push(`Creato: ${coordsPath}`);
   }
 
   // Copia la guida utente nella directory di progetto

@@ -102,6 +102,9 @@ export function buildTypesText(config) {
         lines.push(`  │    • ${c.name.padEnd(18)} ${String(c.percentage + '%').padStart(4)}  →  split: ${c.splitGroup}`);
       }
     }
+    if (et.defaultPaymentCoordinatesId) {
+      lines.push(`  │  Coordinate predefinite: ${et.defaultPaymentCoordinatesId}`);
+    }
     lines.push('  └─');
     lines.push('');
   }

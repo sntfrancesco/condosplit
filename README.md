@@ -71,6 +71,17 @@ Dividi la pulizia scala di febbraio 2026 da €80,00
 Ripartisci la quota ascensore del primo trimestre 2026 di €210,50 e salvala nello storico
 ```
 
+Quando vengono calcolate spese e sono presenti coordinate di pagamento configurate, Claude mostrerà la lista e chiederà quale includere nel report.
+
+### Gestire le coordinate di pagamento
+
+```
+Mostrami le coordinate di pagamento disponibili
+Aggiungi una coordinata: Enel Energia, IBAN IT60X0542811101000000123456, banca Intesa Sanpaolo
+```
+
+Le coordinate vengono salvate in `condo.coordinates.json` nella directory del progetto. Ogni tipo di spesa in `condo.config.json` può avere un campo `defaultPaymentCoordinatesId` che suggerisce la coordinata predefinita.
+
 ### Consultare lo storico
 
 ```
@@ -83,11 +94,38 @@ Mostrami lo storico delle spese condominiali
 
 | Strumento | Descrizione |
 |-----------|-------------|
-| `condosplit_init` | Crea `condo.config.json` nella directory specificata |
+| `condosplit_init` | Crea `condo.config.json` e `condo.coordinates.json` nella directory specificata |
 | `condosplit_schema` | Visualizza lo schema ASCII dell'edificio |
 | `condosplit_types` | Elenca i tipi di spesa configurati |
-| `condosplit_split` | Calcola la suddivisione di una spesa |
+| `condosplit_split` | Calcola la suddivisione di una spesa; se sono presenti coordinate, chiede quale includere nel report |
 | `condosplit_history` | Mostra lo storico delle spese salvate |
+| `condosplit_coordinates` | Elenca le coordinate di pagamento in `condo.coordinates.json` |
+| `condosplit_coordinates_save` | Aggiunge o aggiorna una coordinata di pagamento |
+
+---
+
+## Struttura di `condo.coordinates.json`
+
+File generato automaticamente nella directory di progetto. Contiene tutte le coordinate di pagamento configurate. Viene creato vuoto da `condosplit_init` e popolato con `condosplit_coordinates_save`.
+
+```json
+{
+  "coordinates": [
+    {
+      "id": "enel_energia",
+      "label": "Enel Energia",
+      "intestatario": "Condominio Via Roma 1",
+      "iban": "IT60X0542811101000000123456",
+      "swift": "BCITITMM",
+      "banca": "Intesa Sanpaolo",
+      "causale": "Bolletta luce scala",
+      "note": "Inserire numero cliente in causale"
+    }
+  ]
+}
+```
+
+Tutti i campi tranne `id` e `label` sono opzionali.
 
 ---
 
@@ -111,9 +149,10 @@ Mostrami lo storico delle spese condominiali
   },
   "expenseTypes": [
     {
-      "id": "pulizia_scala",       // usato nel tool condosplit_split
+      "id": "pulizia_scala",                        // usato nel tool condosplit_split
       "name": "Pulizia Scala",
-      "splitRule": "occupied_staircase_equal"  // solo abitati con accesso scala
+      "splitRule": "occupied_staircase_equal",       // solo abitati con accesso scala
+      "defaultPaymentCoordinatesId": "impresa_pulizie"  // ID in condo.coordinates.json (opzionale)
     },
     {
       "id": "bolletta_luce",
@@ -162,15 +201,17 @@ Nello schema dell'edificio le unità non abitate sono marcate con **⊘**.
 ```
 condosplit/
 ├── src/
-│   ├── server.js      ← entry point MCP server
-│   ├── config.js      ← caricamento e validazione configurazione
-│   ├── building.js    ← rendering schema ASCII
-│   ├── expenses.js    ← logica di ripartizione
-│   ├── report.js      ← formattazione report
-│   ├── history.js     ← storico spese
-│   └── init.js        ← inizializzazione progetto
+│   ├── server.js        ← entry point MCP server
+│   ├── config.js        ← caricamento e validazione configurazione
+│   ├── building.js      ← rendering schema ASCII
+│   ├── expenses.js      ← logica di ripartizione
+│   ├── report.js        ← formattazione report
+│   ├── history.js       ← storico spese
+│   ├── coordinates.js   ← gestione coordinate di pagamento
+│   └── init.js          ← inizializzazione progetto
 ├── examples/
-│   └── condo.config.json
+│   ├── condo.config.json
+│   └── condo.coordinates.json
 ├── package.json
 ├── README.md
 └── README_GUIDE-condosplit.md
