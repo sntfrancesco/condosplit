@@ -169,7 +169,7 @@ const TOOLS = [
 // ── Handlers ──────────────────────────────────────────────────────────────────
 
 function resolveConfigPath(configPath) {
-  return configPath || './condo.config.json';
+  return configPath || './condo_eu58/condo.config.json';
 }
 
 function handleInit({ project_dir = '.' }) {
